@@ -1,0 +1,4 @@
+09/27 20:50:17.463: [sbi] INFO: GOAWAY received: last-stream-id=0 (../lib/sbi/nghttp2-server.c:1376)
+09/27 20:50:17.463: [sbi] INFO: error_code=0 (../lib/sbi/nghttp2-server.c:1378)
+09/27 20:50:17.505: [ausf] WARNING: UnRef NF EndPoint(addr) [127.0.0.12:7777] (../src/ausf/nudm-handler.c:339)
+09/27 20:50:17.505: [ausf] INFO: Setup NF EndPoint(addr) [127.0.0.12:7777] (../src/ausf/nudm-handler.c:339)

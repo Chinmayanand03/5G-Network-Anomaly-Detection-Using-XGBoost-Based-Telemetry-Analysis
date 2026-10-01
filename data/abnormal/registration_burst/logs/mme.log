@@ -1,0 +1,31 @@
+09/27 20:18:39.626: [diam] ERROR: pid:PSM/hss.localdomain in fd_psm_change_state@p_psm.c:284: 'STATE_OPEN'	-> 'STATE_SUSPECT'	'hss.localdomain'
+ ((null):0)
+09/27 20:18:40.451: [diam] ERROR: pid:PSM/hss.localdomain in md_hook_cb_tree@dbg_msg_dumps.c:116: DROPPED 'Answer received with no corresponding sent request.'
+ ((null):0)
+09/27 20:18:40.451: [diam] ERROR: pid:PSM/hss.localdomain in md_hook_cb_tree@dbg_msg_dumps.c:117:      'Device-Watchdog-Answer'
+ ((null):0)
+09/27 20:18:40.451: [diam] ERROR: pid:PSM/hss.localdomain in md_hook_cb_tree@dbg_msg_dumps.c:117:        Version: 0x01
+ ((null):0)
+09/27 20:18:40.451: [diam] ERROR: pid:PSM/hss.localdomain in md_hook_cb_tree@dbg_msg_dumps.c:117:        Length: 88
+ ((null):0)
+09/27 20:18:40.451: [diam] ERROR: pid:PSM/hss.localdomain in md_hook_cb_tree@dbg_msg_dumps.c:117:        Flags: 0x00 (----)
+ ((null):0)
+09/27 20:18:40.451: [diam] ERROR: pid:PSM/hss.localdomain in md_hook_cb_tree@dbg_msg_dumps.c:117:        Command Code: 280
+ ((null):0)
+09/27 20:18:40.451: [diam] ERROR: pid:PSM/hss.localdomain in md_hook_cb_tree@dbg_msg_dumps.c:117:        ApplicationId: 0
+ ((null):0)
+09/27 20:18:40.451: [diam] ERROR: pid:PSM/hss.localdomain in md_hook_cb_tree@dbg_msg_dumps.c:117:        Hop-by-Hop Identifier: 0x32239107
+ ((null):0)
+09/27 20:18:40.451: [diam] ERROR: pid:PSM/hss.localdomain in md_hook_cb_tree@dbg_msg_dumps.c:117:        End-to-End Identifier: 0xEC30203A
+ ((null):0)
+09/27 20:18:40.451: [diam] ERROR: pid:PSM/hss.localdomain in md_hook_cb_tree@dbg_msg_dumps.c:117:         {internal data}: src:hss.localdomain(15) rwb:(nil) rt:0 cb:(nil),(nil)((nil)) qry:(nil) asso:0 sess:(nil)
+ ((null):0)
+09/27 20:18:40.451: [diam] ERROR: pid:PSM/hss.localdomain in md_hook_cb_tree@dbg_msg_dumps.c:117:         AVP: 'Result-Code'(268) l=12 f=-M val='DIAMETER_SUCCESS' (2001 (0x7d1))
+ ((null):0)
+09/27 20:18:40.451: [diam] ERROR: pid:PSM/hss.localdomain in md_hook_cb_tree@dbg_msg_dumps.c:117:         AVP: 'Origin-Host'(264) l=23 f=-M val="hss.localdomain"
+ ((null):0)
+09/27 20:18:40.451: [diam] ERROR: pid:PSM/hss.localdomain in md_hook_cb_tree@dbg_msg_dumps.c:117:         AVP: 'Origin-Realm'(296) l=19 f=-M val="localdomain"
+ ((null):0)
+09/27 20:18:40.451: [diam] ERROR: pid:PSM/hss.localdomain in md_hook_cb_tree@dbg_msg_dumps.c:117:         AVP: 'Origin-State-Id'(278) l=12 f=-M val=1790504661 (0x6ab8eed5)
+ ((null):0)
+09/27 20:20:10.240: [diam] INFO: CONNECTED TO 'hss.localdomain' (SCTP,soc#18): (../lib/diameter/common/logger.c:81)

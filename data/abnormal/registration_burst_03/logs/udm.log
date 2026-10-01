@@ -1,0 +1,2 @@
+09/27 21:38:15.399: [sbi] INFO: GOAWAY received: last-stream-id=0 (../lib/sbi/nghttp2-server.c:1376)
+09/27 21:38:15.399: [sbi] INFO: error_code=0 (../lib/sbi/nghttp2-server.c:1378)

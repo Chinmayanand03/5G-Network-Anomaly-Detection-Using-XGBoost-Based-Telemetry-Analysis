@@ -1,0 +1,6 @@
+09/27 16:39:18.095: [sbi] INFO: [8f7cad36-ba5d-41f1-bd74-d3a7e6e884d3] Setup NF Instance [type:UDM] (../lib/sbi/path.c:349)
+09/27 16:39:18.250: [ausf] INFO: Setup NF EndPoint(addr) [127.0.0.12:7777] (../src/ausf/nudm-handler.c:339)
+09/27 17:59:00.223: [sbi] INFO: GOAWAY received: last-stream-id=0 (../lib/sbi/nghttp2-server.c:1376)
+09/27 17:59:00.223: [sbi] INFO: error_code=0 (../lib/sbi/nghttp2-server.c:1378)
+09/27 17:59:00.260: [ausf] WARNING: UnRef NF EndPoint(addr) [127.0.0.12:7777] (../src/ausf/nudm-handler.c:339)
+09/27 17:59:00.260: [ausf] INFO: Setup NF EndPoint(addr) [127.0.0.12:7777] (../src/ausf/nudm-handler.c:339)

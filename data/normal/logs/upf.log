@@ -1,0 +1,7 @@
+09/27 16:39:18.680: [upf] INFO: [Added] Number of UPF-Sessions is now 1 (../src/upf/context.c:212)
+09/27 16:39:18.689: [gtp] INFO: gtp_connect() [127.0.0.4]:2152 (../lib/gtp/path.c:60)
+09/27 16:39:18.689: [upf] INFO: UE F-SEID[UP:0x9ac CP:0x2c5] APN[internet] PDN-Type[1] IPv4[10.45.0.2] IPv6[] (../src/upf/context.c:498)
+09/27 16:39:18.723: [gtp] INFO: gtp_connect() [127.0.0.1]:2152 (../lib/gtp/path.c:60)
+09/27 17:59:00.183: [upf] INFO: [Removed] Number of UPF-sessions is now 0 (../src/upf/context.c:256)
+09/27 17:59:00.564: [upf] INFO: [Added] Number of UPF-Sessions is now 1 (../src/upf/context.c:212)
+09/27 17:59:00.564: [upf] INFO: UE F-SEID[UP:0x915 CP:0xad5] APN[internet] PDN-Type[1] IPv4[10.45.0.3] IPv6[] (../src/upf/context.c:498)

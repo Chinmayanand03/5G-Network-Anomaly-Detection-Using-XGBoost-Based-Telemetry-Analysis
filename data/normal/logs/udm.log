@@ -1,0 +1,6 @@
+09/27 16:39:18.098: [sbi] INFO: GOAWAY received: last-stream-id=0 (../lib/sbi/nghttp2-server.c:1376)
+09/27 16:39:18.098: [sbi] INFO: error_code=0 (../lib/sbi/nghttp2-server.c:1378)
+09/27 16:39:18.100: [sbi] INFO: [99d22de2-ba5d-41f1-904a-25cb8763f3a8] Setup NF Instance [type:UDR] (../lib/sbi/path.c:349)
+09/27 16:39:18.733: [sbi] INFO: [99d22de2-ba5d-41f1-904a-25cb8763f3a8] Setup NF Instance [type:UDR] (../lib/sbi/path.c:349)
+09/27 17:59:00.203: [sbi] INFO: GOAWAY received: last-stream-id=0 (../lib/sbi/nghttp2-server.c:1376)
+09/27 17:59:00.203: [sbi] INFO: error_code=0 (../lib/sbi/nghttp2-server.c:1378)

@@ -1,0 +1,3 @@
+09/27 20:19:40.456: [diam] ERROR: pid:PSM/mme.localdomain in fd_psm_change_state@p_psm.c:284: 'STATE_OPEN'	-> 'STATE_CLOSED'	'mme.localdomain'
+ ((null):0)
+09/27 20:20:10.241: [diam] INFO: CONNECTED TO 'mme.localdomain' (SCTP,soc#17): (../lib/diameter/common/logger.c:81)
