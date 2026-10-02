@@ -58,23 +58,41 @@ The following architecture represents the implemented project flow.
 
 ```mermaid
 flowchart TD
-    A["5G Network Traffic (PCAP / Logs)"] --> B["Normal and Abnormal Telemetry Data"]
-    B --> C["Feature Extraction Module"]
-    C --> D["19 Telemetry Features Dataset<br/>(data/features/all_runs_features.csv)"]
-    D --> E["XGBoost Classification Model<br/>(models/xgboost_model.pkl)"]
-    F["Feature Order Config<br/>(models/feature_columns.txt)"] --> E
+    subgraph DataIngestion ["1. Data Collection & Preprocessing"]
+        A["5G Network Traffic<br/>(PCAP / Packet Data / Network Logs)"] --> B["Raw Telemetry Dataset"]
+        B --> C1["Normal Traffic Samples"]
+        B --> C2["Abnormal Traffic Samples"]
+    end
 
-    E --> G{"Traffic Classification"}
+    subgraph FeatureEngineering ["2. Feature Extraction"]
+        C1 --> D["Feature Extraction Module"]
+        C2 --> D
+        D --> E["Telemetry Feature Dataset<br/>data/features/all_runs_features.csv"]
+        E --> F["19 Telemetry Features Vector"]
+    end
 
-    G -->|Class 0| H["Normal Traffic"]
-    G -->|Class 1| I["Abnormal Traffic"]
-    E --> J["Prediction Probability Score"]
+    subgraph MLInference ["3. XGBoost Classification Model"]
+        H["Feature Definition Config<br/>models/feature_columns.txt"] --> G["XGBoost Classification Model<br/>models/xgboost_model.pkl"]
+        F --> G
+        G --> I{"Traffic Classification"}
+        I -->|Normal Class| J["Normal Telemetry Window"]
+        I -->|Abnormal Class| K["Abnormal Telemetry Window"]
+        G --> L["Prediction Probability Score"]
+    end
 
-    H --> K["Streamlit Dashboard"]
-    I --> K
-    J --> K
+    subgraph DashboardUI ["4. Streamlit Interactive Dashboard"]
+        J --> M["Streamlit Dashboard"]
+        K --> M
+        L --> M
+        M --> N1["Overview Module"]
+        M --> N2["Telemetry Analysis"]
+        M --> N3["Feature Importance"]
+        M --> N4["Anomaly Detection"]
+        M --> N5["Dataset Inspector"]
+        N4 --> O["Investigation & Response Guidance"]
+    end
 
-    K --> L["Telemetry Analysis and Investigation Guidance"]
+    DataIngestion ~~~ FeatureEngineering ~~~ MLInference ~~~ DashboardUI
 ```
 
 ### Architecture Components
@@ -340,18 +358,28 @@ The Streamlit dashboard loads the project data and trained model using the follo
 
 ```mermaid
 flowchart TD
-    A["data/features/all_runs_features.csv"] --> B["Pandas DataFrame"]
-    B --> C["19 Telemetry Features Vector"]
-    C --> D["XGBoost Classifier Model<br/>(models/xgboost_model.pkl)"]
-    E["models/feature_columns.txt<br/>(Feature Order)"] --> D
+    subgraph DataInput ["Data Source"]
+        A["data/features/all_runs_features.csv"] --> B["Pandas DataFrame"]
+        B --> C["19 Feature Columns Vector"]
+    end
 
-    D --> F{"XGBoost Prediction"}
+    subgraph ModelInference ["Model Prediction"]
+        D["models/feature_columns.txt<br/>(Feature Order)"] -.-> E
+        C --> E["models/xgboost_model.pkl<br/>(XGBoost Model)"]
+        E --> F{"XGBoost Prediction"}
+    end
 
-    F -->|Class 0| G["Normal Traffic"]
-    F -->|Class 1| H["Abnormal Traffic"]
+    subgraph ClassOutput ["Classification Decision"]
+        F -->|Class 0| G["Normal Traffic"]
+        F -->|Class 1| H["Abnormal Traffic"]
+    end
 
-    G --> I["Streamlit Dashboard"]
-    H --> I
+    subgraph DashboardView ["Visualization UI"]
+        G --> I["Streamlit Dashboard"]
+        H --> I
+    end
+
+    DataInput ~~~ ModelInference ~~~ ClassOutput ~~~ DashboardView
 ```
 
 The feature order is read from:
@@ -415,21 +443,21 @@ Make sure these paths match the files in your repository before running the appl
 ```mermaid
 sequenceDiagram
     autonumber
-    actor U as User / Network Analyst
-    participant S as Streamlit Dashboard
-    participant M as XGBoost Model
-    participant F as Feature Extraction
     participant D as Telemetry Dataset
+    participant F as Feature Extraction
+    participant M as XGBoost Model
+    participant S as Streamlit Dashboard
+    actor U as User / Network Analyst
 
-    D->>F: Raw packet & network data
-    F->>M: Telemetry feature vector
-    M->>M: Execute classification inference
-    M->>S: Pass prediction & probability score
-    S->>U: Display dashboard summary
-    U->>S: Select specific telemetry window
-    S->>M: Query feature deviation for window
-    M->>S: Return window prediction + probability
-    S->>U: Render classification & investigation guidance
+    D->>F: Raw Packet & Network Data
+    F->>M: Telemetry Feature Vector (19 Features)
+    M->>M: Execute Classification Inference
+    M->>S: Pass Prediction & Probability Score
+    S->>U: Display Overview & Detection Alerts
+    U->>S: Select Specific Telemetry Window
+    S->>M: Query Feature Deviation Details
+    M->>S: Return Prediction & Deviation Metrics
+    S->>U: Render Classification & Investigation Guidance
 ```
 
 ---
