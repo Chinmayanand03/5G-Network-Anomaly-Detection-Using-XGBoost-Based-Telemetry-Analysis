@@ -59,20 +59,17 @@ The following architecture represents the implemented project flow.
 ```mermaid
 flowchart TD
     subgraph DataIngestion ["1. Data Collection & Preprocessing"]
-        direction TB
         A["5G Network Traffic<br/>(PCAP / Packet Data / Network Logs)"] --> B["Raw Telemetry Dataset"]
         B --> C1["Normal Traffic Samples"]
         B --> C2["Abnormal Traffic Samples"]
     end
 
     subgraph FeatureEngineering ["2. Feature Extraction"]
-        direction TB
         D["Feature Extraction Module"] --> E["Telemetry Feature Dataset<br/>data/features/all_runs_features.csv"]
         E --> F["19 Telemetry Features Vector"]
     end
 
     subgraph MLInference ["3. XGBoost Classification Model"]
-        direction TB
         H["Feature Definition Config<br/>models/feature_columns.txt"] --> G["XGBoost Classification Model<br/>models/xgboost_model.pkl"]
         G --> I{"Traffic Classification"}
         I -->|Normal Class| J["Normal Telemetry Window"]
@@ -81,7 +78,6 @@ flowchart TD
     end
 
     subgraph DashboardUI ["4. Streamlit Interactive Dashboard"]
-        direction TB
         M["Streamlit Dashboard"]
         M --> N1["Overview Module"]
         M --> N2["Telemetry Analysis"]
@@ -363,13 +359,11 @@ The Streamlit dashboard loads the project data and trained model using the follo
 ```mermaid
 flowchart TD
     subgraph DataInput ["Data Source"]
-        direction TB
         A["data/features/all_runs_features.csv"] --> B["Pandas DataFrame"]
         B --> C["19 Feature Columns Vector"]
     end
 
     subgraph ModelInference ["Model Prediction"]
-        direction TB
         D["models/feature_columns.txt<br/>(Feature Order)"] -.-> E["models/xgboost_model.pkl<br/>(XGBoost Model)"]
         E --> F{"XGBoost Prediction"}
     end
