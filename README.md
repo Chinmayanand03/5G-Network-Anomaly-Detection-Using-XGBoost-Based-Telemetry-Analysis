@@ -58,41 +58,34 @@ The following architecture represents the implemented project flow.
 
 ```mermaid
 flowchart TD
-    subgraph DataIngestion ["1. Data Collection & Preprocessing"]
-        A["5G Network Traffic<br/>(PCAP / Packet Data / Network Logs)"] --> B["Raw Telemetry Dataset"]
-        B --> C1["Normal Traffic Samples"]
-        B --> C2["Abnormal Traffic Samples"]
-    end
+    A["1. Data Collection: 5G Network Traffic<br/>(PCAP / Packet Data / Network Logs)"] --> B["Raw Telemetry Dataset"]
+    B --> C1["Normal Traffic Samples"]
+    B --> C2["Abnormal Traffic Samples"]
 
-    subgraph FeatureEngineering ["2. Feature Extraction"]
-        D["Feature Extraction Module"] --> E["Telemetry Feature Dataset<br/>data/features/all_runs_features.csv"]
-        E --> F["19 Telemetry Features Vector"]
-    end
-
-    subgraph MLInference ["3. XGBoost Classification Model"]
-        H["Feature Definition Config<br/>models/feature_columns.txt"] --> G["XGBoost Classification Model<br/>models/xgboost_model.pkl"]
-        G --> I{"Traffic Classification"}
-        I -->|Normal Class| J["Normal Telemetry Window"]
-        I -->|Abnormal Class| K["Abnormal Telemetry Window"]
-        G --> L["Prediction Probability Score"]
-    end
-
-    subgraph DashboardUI ["4. Streamlit Interactive Dashboard"]
-        M["Streamlit Dashboard"]
-        M --> N1["Overview Module"]
-        M --> N2["Telemetry Analysis"]
-        M --> N3["Feature Importance"]
-        M --> N4["Anomaly Detection"]
-        M --> N5["Dataset Inspector"]
-        N4 --> O["Investigation & Response Guidance"]
-    end
-
-    C1 --> D
+    C1 --> D["2. Feature Extraction Module"]
     C2 --> D
+    D --> E["Telemetry Feature Dataset<br/>data/features/all_runs_features.csv"]
+    E --> F["19 Telemetry Features Vector"]
+
+    H["Feature Definition Config<br/>models/feature_columns.txt"] --> G["3. XGBoost Classification Model<br/>models/xgboost_model.pkl"]
     F --> G
-    J --> M
+    G --> I{"Traffic Classification"}
+
+    I -->|Normal Class| J["Normal Telemetry Window"]
+    I -->|Abnormal Class| K["Abnormal Telemetry Window"]
+    G --> L["Prediction Probability Score"]
+
+    J --> M["4. Streamlit Interactive Dashboard"]
     K --> M
     L --> M
+
+    M --> N1["Overview Module"]
+    M --> N2["Telemetry Analysis"]
+    M --> N3["Feature Importance"]
+    M --> N4["Anomaly Detection"]
+    M --> N5["Dataset Inspector"]
+
+    N4 --> O["Investigation & Response Guidance"]
 ```
 
 ### Architecture Components
@@ -358,29 +351,17 @@ The Streamlit dashboard loads the project data and trained model using the follo
 
 ```mermaid
 flowchart TD
-    subgraph DataInput ["Data Source"]
-        A["data/features/all_runs_features.csv"] --> B["Pandas DataFrame"]
-        B --> C["19 Feature Columns Vector"]
-    end
+    A["Data Source<br/>data/features/all_runs_features.csv"] --> B["Pandas DataFrame"]
+    B --> C["19 Feature Columns Vector"]
 
-    subgraph ModelInference ["Model Prediction"]
-        D["models/feature_columns.txt<br/>(Feature Order)"] -.-> E["models/xgboost_model.pkl<br/>(XGBoost Model)"]
-        E --> F{"XGBoost Prediction"}
-    end
-
-    subgraph ClassOutput ["Classification Decision"]
-        G["Normal Traffic"]
-        H["Abnormal Traffic"]
-    end
-
-    subgraph DashboardView ["Visualization UI"]
-        I["Streamlit Dashboard"]
-    end
-
+    D["Feature Order Config<br/>models/feature_columns.txt"] -.-> E["Model Prediction<br/>models/xgboost_model.pkl"]
     C --> E
-    F -->|Class 0| G
-    F -->|Class 1| H
-    G --> I
+    E --> F{"XGBoost Prediction"}
+
+    F -->|Class 0| G["Classification Decision: Normal Traffic"]
+    F -->|Class 1| H["Classification Decision: Abnormal Traffic"]
+
+    G --> I["Visualization UI<br/>Streamlit Dashboard"]
     H --> I
 ```
 
