@@ -59,21 +59,21 @@ The following architecture represents the implemented project flow.
 ```mermaid
 flowchart TD
     subgraph DataIngestion ["1. Data Collection & Preprocessing"]
+        direction TB
         A["5G Network Traffic<br/>(PCAP / Packet Data / Network Logs)"] --> B["Raw Telemetry Dataset"]
         B --> C1["Normal Traffic Samples"]
         B --> C2["Abnormal Traffic Samples"]
     end
 
     subgraph FeatureEngineering ["2. Feature Extraction"]
-        C1 --> D["Feature Extraction Module"]
-        C2 --> D
-        D --> E["Telemetry Feature Dataset<br/>data/features/all_runs_features.csv"]
+        direction TB
+        D["Feature Extraction Module"] --> E["Telemetry Feature Dataset<br/>data/features/all_runs_features.csv"]
         E --> F["19 Telemetry Features Vector"]
     end
 
     subgraph MLInference ["3. XGBoost Classification Model"]
+        direction TB
         H["Feature Definition Config<br/>models/feature_columns.txt"] --> G["XGBoost Classification Model<br/>models/xgboost_model.pkl"]
-        F --> G
         G --> I{"Traffic Classification"}
         I -->|Normal Class| J["Normal Telemetry Window"]
         I -->|Abnormal Class| K["Abnormal Telemetry Window"]
@@ -81,9 +81,8 @@ flowchart TD
     end
 
     subgraph DashboardUI ["4. Streamlit Interactive Dashboard"]
-        J --> M["Streamlit Dashboard"]
-        K --> M
-        L --> M
+        direction TB
+        M["Streamlit Dashboard"]
         M --> N1["Overview Module"]
         M --> N2["Telemetry Analysis"]
         M --> N3["Feature Importance"]
@@ -92,7 +91,12 @@ flowchart TD
         N4 --> O["Investigation & Response Guidance"]
     end
 
-    DataIngestion ~~~ FeatureEngineering ~~~ MLInference ~~~ DashboardUI
+    C1 --> D
+    C2 --> D
+    F --> G
+    J --> M
+    K --> M
+    L --> M
 ```
 
 ### Architecture Components
@@ -359,27 +363,31 @@ The Streamlit dashboard loads the project data and trained model using the follo
 ```mermaid
 flowchart TD
     subgraph DataInput ["Data Source"]
+        direction TB
         A["data/features/all_runs_features.csv"] --> B["Pandas DataFrame"]
         B --> C["19 Feature Columns Vector"]
     end
 
     subgraph ModelInference ["Model Prediction"]
-        D["models/feature_columns.txt<br/>(Feature Order)"] -.-> E
-        C --> E["models/xgboost_model.pkl<br/>(XGBoost Model)"]
+        direction TB
+        D["models/feature_columns.txt<br/>(Feature Order)"] -.-> E["models/xgboost_model.pkl<br/>(XGBoost Model)"]
         E --> F{"XGBoost Prediction"}
     end
 
     subgraph ClassOutput ["Classification Decision"]
-        F -->|Class 0| G["Normal Traffic"]
-        F -->|Class 1| H["Abnormal Traffic"]
+        G["Normal Traffic"]
+        H["Abnormal Traffic"]
     end
 
     subgraph DashboardView ["Visualization UI"]
-        G --> I["Streamlit Dashboard"]
-        H --> I
+        I["Streamlit Dashboard"]
     end
 
-    DataInput ~~~ ModelInference ~~~ ClassOutput ~~~ DashboardView
+    C --> E
+    F -->|Class 0| G
+    F -->|Class 1| H
+    G --> I
+    H --> I
 ```
 
 The feature order is read from:
